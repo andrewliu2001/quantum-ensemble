@@ -33,8 +33,8 @@ General approach: Use 3 quantum registers: Data (encodes training set), control 
 
 **Division of tasks + Tentative timeline:**
 
-1. Understand theory of approach (Read section **Quantum Algorithm for Classification Ensemble**). —> Both of us (complete by April 2)
-2. Understand where complexity advantage arises from (Read subsection 3.3 Computational Complexity + potentially consult other papers). —> Both of us (by April 2)
+1. Understand theory of approach (Read section **Quantum Algorithm for Classification Ensemble**). (complete by April 2)
+2. Understand where complexity advantage arises from (Read subsection 3.3 Computational Complexity + potentially consult other papers). 
 3. Qiskit implementation part: (complete by April 9)
     1. Quantum cosine classifier module 
     2. State preparation circuit 
