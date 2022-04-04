@@ -1,3 +1,3 @@
 # quantum-ensemble
 
-Quantum simulation/computation project
+Quantum simulation/computation project based on https://arxiv.org/abs/2007.01028
