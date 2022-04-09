@@ -2,21 +2,6 @@
 
 Quantum simulation/computation project based on https://arxiv.org/abs/2007.01028
 
-
-**Project proposal:**
-
-Group members: Erinn Sun, Andrew Liu
-
-Project title: Quantum Ensemble 
-
-Objectives:
-
-1. **Understand the theoretical justification as to potential advantages of quantum ensemble classification compared to other methods.**
-2. **Implement circuits proposed by “Quantum Ensemble for Classification” on Qiskit.**
-3. **Experimentally verify the advantages of quantum ensemble algorithms over classical ensemble algorithms in terms of complexity.**
-
----
-
 **Summary of Quantum Ensemble Paper:**
 
 General approach: Use 3 quantum registers: Data (encodes training set), control (d-qubits), test (encodes test set).
