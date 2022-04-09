@@ -2,6 +2,10 @@
 
 Quantum simulation/computation project based on https://arxiv.org/abs/2007.01028
 
+
+
+Group members: Erinn, Andrew
+
 **Summary of Quantum Ensemble Paper:**
 
 General approach: Use 3 quantum registers: Data (encodes training set), control (d-qubits), test (encodes test set).
