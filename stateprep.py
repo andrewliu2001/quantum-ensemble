@@ -7,11 +7,11 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, Aer, exec
 from qiskit.visualization import plot_bloch_multivector
 
 
+
+
 def stateprep(x_train, y_train, x_test, d):
 
   """
-  State preparation circuit
-  
   x_train: array of training features
   y_train: array of binary training labels
   x_test: array of test features
@@ -20,7 +20,13 @@ def stateprep(x_train, y_train, x_test, d):
 
   N = x_train.shape[0]
 
-  stateprep = QuantumCircuit(d+ 2*N + 2)
+  control_reg = QuantumRegister(d, 'control')
+  x_train_reg = QuantumRegister(N, 'x_train')
+  y_train_reg = QuantumRegister(N, 'y_train')
+  x_test_reg = QuantumRegister(1, 'x_test')
+  prediction_reg = QuantumRegister(1, 'prediction')
+
+  stateprep = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg)
 
   #create uniform superposition of control qubits
   for i in range(d):
