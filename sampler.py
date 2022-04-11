@@ -5,6 +5,7 @@ from mpl_toolkits import mplot3d
 import mpl_toolkits.mplot3d.art3d as art3d
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, Aer, execute
 from qiskit.visualization import plot_bloch_multivector
+import random
 
 def superposition_sampler(x_train, y_train, x_test, d):
 
@@ -25,17 +26,13 @@ def superposition_sampler(x_train, y_train, x_test, d):
   sampler = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg)
 
   for i in range(d):
-    if(i % 2 == 0):
-      sampler.cswap(i, i+2, i+4)
-      sampler.cswap(i, i+2+N, i+4+N)
-      sampler.x(i)
-      sampler.cswap(i, i+3, i+5)
-      sampler.cswap(i, i+3+N, i+5+N)
-      sampler.barrier()
-    else:
-      sampler.x(i)
-      sampler.cswap(i, i+3, i+4)
-      sampler.cswap(i, i+7, i+8)
-      sampler.barrier()
+    l, m, lp, mp = random.sample(range(0,N), 4)
+
+    sampler.cswap(control_reg[i], x_train_reg[l], x_train_reg[m])
+    sampler.cswap(control_reg[i], y_train_reg[l], y_train_reg[m])
+    sampler.x(i)
+    sampler.cswap(control_reg[i], x_train_reg[lp], x_train_reg[mp])
+    sampler.cswap(control_reg[i], y_train_reg[lp], y_train_reg[mp])
+    sampler.barrier()
 
   return sampler

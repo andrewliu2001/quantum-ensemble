@@ -12,9 +12,9 @@ from qiskit.visualization import plot_bloch_multivector
 def stateprep(x_train, y_train, x_test, d):
 
   """
-  x_train: array of training features
-  y_train: array of binary training labels
-  x_test: array of test features
+  x_train: array of training features (n_samples, 2)
+  y_train: array of binary training labels (n_samples, )
+  x_test: array of test features (2, )
   d: number of control qubits. Generates 2^d transformations to training data
   """
 
@@ -29,8 +29,7 @@ def stateprep(x_train, y_train, x_test, d):
   stateprep = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg)
 
   #create uniform superposition of control qubits
-  for i in range(d):
-    stateprep.h(i)
+  stateprep.h(control_reg)
 
 
   #initialize training data

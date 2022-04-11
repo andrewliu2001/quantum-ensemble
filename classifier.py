@@ -13,8 +13,7 @@ from mpl_toolkits import mplot3d
 import mpl_toolkits.mplot3d.art3d as art3d
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, Aer, execute
 from qiskit.visualization import plot_bloch_multivector
-warnings.filterwarnings('ignore', category=DeprecationWarning)
-
+import random
 
 
 
@@ -32,9 +31,12 @@ def cosine_classifier(N, d):
 
   f = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg)
   f.h(prediction_reg[0])
-  f.cswap(prediction_reg[0], x_train_reg[N-1], x_test_reg[0])
+
+  k = random.sample(range(0, N), 1)
+
+  f.cswap(prediction_reg[0], x_train_reg[k], x_test_reg[0])
   f.h(prediction_reg[0])
-  f.cx(y_train_reg[N-1], prediction_reg[0])
+  f.cx(y_train_reg[k], prediction_reg[0])
   f.barrier()
   
   return f
