@@ -23,13 +23,16 @@ def cosine_classifier(N, d):
   N: number of train samples
   d: number of control qubits. Generates 2^d transformations to training data
   """
-  control_reg = QuantumRegister(d, 'control')
+  control_reg = QuantumRegister(max(d,1), 'control')
   x_train_reg = QuantumRegister(N, 'x_train')
   y_train_reg = QuantumRegister(N, 'y_train')
   x_test_reg = QuantumRegister(1, 'x_test')
   prediction_reg = QuantumRegister(1, 'prediction')
+  cr = ClassicalRegister(1, name = "cr")
 
-  f = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg)
+
+
+  f = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg, cr)
   f.h(prediction_reg[0])
 
   k = random.sample(range(0, N), 1)
@@ -42,11 +45,20 @@ def cosine_classifier(N, d):
   return f
 
 
-def measure():
-    
+def measure(N, d):
+    """
+    N: number of train samples
+    d: number of control qubits. Generates 2^d transformations to training data
+    """
+        
+    control_reg = QuantumRegister(max(d,1), 'control')
+    x_train_reg = QuantumRegister(N, 'x_train')
+    y_train_reg = QuantumRegister(N, 'y_train')
+    x_test_reg = QuantumRegister(1, 'x_test')
     prediction_reg = QuantumRegister(1, 'prediction')
     cr = ClassicalRegister(1, name = "cr")
-    m = QuantumCircuit(prediction_reg, cr)
+    
+    m = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg, cr)
     m.measure(prediction_reg[0], cr[0])
     
     return m

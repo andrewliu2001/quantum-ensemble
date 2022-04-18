@@ -20,16 +20,21 @@ def stateprep(x_train, y_train, x_test, d):
 
   N = x_train.shape[0]
 
-  control_reg = QuantumRegister(d, 'control')
+  control_reg = QuantumRegister(max(d, 1), 'control')
+    
   x_train_reg = QuantumRegister(N, 'x_train')
   y_train_reg = QuantumRegister(N, 'y_train')
   x_test_reg = QuantumRegister(1, 'x_test')
   prediction_reg = QuantumRegister(1, 'prediction')
+  cr = ClassicalRegister(1, name = "cr")
 
-  stateprep = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg)
+
+
+  stateprep = QuantumCircuit(control_reg, x_train_reg, y_train_reg, x_test_reg, prediction_reg, cr)
 
   #create uniform superposition of control qubits
-  stateprep.h(control_reg)
+  for i in range(d):
+    stateprep.h(control_reg[i])
 
 
   #initialize training data
